@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>追剧网站_高清剧集社区,陪你追每一部好剧</title>
+<meta name="description" content="剧作人是专注剧集内容的追剧网站官方网站，汇聚原创高清剧集、剧评社区与创作者生态，为影迷提供值得信赖的追剧体验。">
+<meta name="keywords" content="追剧网站,剧集社区,追剧,剧评,原创剧集,创作者">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101826'/%3E%3Cpath d='M24 18l24 14-24 14z' fill='%23ff5a5f'/%3E%3C/svg%3E">
+<style>
+:root{
+  --drama-ink:#101826;
+  --drama-ink2:#1b2436;
+  --drama-line:#2a3550;
+  --drama-text:#e8ecf5;
+  --drama-dim:#9aa7c2;
+  --drama-accent:#ff5a5f;
+  --drama-accent2:#39d0c8;
+  --drama-amber:#ffc46b;
+  --drama-card:#161f30;
+  --drama-radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--drama-ink);
+  color:var(--drama-text);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.drama-container{width:min(1180px,92vw);margin:0 auto}
+
+/* ===== 吸顶公告 + 页头 ===== */
+.drama-sticky{
+  position:sticky;top:0;z-index:90;
+  backdrop-filter:blur(14px);
+  background:rgba(16,24,38,.92);
+  border-bottom:1px solid var(--drama-line);
+}
+.drama-notice{
+  background:linear-gradient(90deg,#2a1a2c,#1c2438 60%,#1a2a2a);
+  border-bottom:1px solid var(--drama-line);
+  font-size:13.5px;
+  color:var(--drama-dim);
+}
+.drama-notice-inner{
+  display:flex;align-items:center;gap:12px;
+  padding:7px 0;flex-wrap:wrap;
+}
+.drama-notice-tag{
+  background:var(--drama-accent);color:#fff;
+  font-size:11.5px;font-weight:700;letter-spacing:.08em;
+  padding:2px 9px;border-radius:999px;flex-shrink:0;
+}
+.drama-notice-text{flex:1;min-width:200px;color:#cfd8ea}
+.drama-notice-text strong{color:var(--drama-amber);font-weight:600}
+.drama-notice-more{color:var(--drama-accent2);font-size:12.5px;white-space:nowrap}
+.drama-header{display:flex;align-items:center;gap:22px;padding:13px 0}
+.drama-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.drama-logo-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(140deg,var(--drama-accent),#b8324f 70%);
+  display:grid;place-items:center;
+  box-shadow:0 6px 18px rgba(255,90,95,.32);
+}
+.drama-logo-mark svg{width:18px;height:18px}
+.drama-logo-name{font-size:20px;font-weight:800;letter-spacing:.02em}
+.drama-logo-name span{color:var(--drama-accent)}
+.drama-logo-sub{font-size:11px;color:var(--drama-dim);letter-spacing:.16em;display:block;line-height:1.2;margin-top:-2px}
+.drama-nav{display:flex;gap:4px;margin-left:6px;flex-wrap:wrap}
+.drama-nav a{
+  font-size:14.5px;color:var(--drama-dim);
+  padding:7px 12px;border-radius:9px;transition:.2s;
+}
+.drama-nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.drama-head-tools{margin-left:auto;display:flex;align-items:center;gap:10px}
+.drama-search{
+  display:flex;align-items:center;gap:8px;
+  background:var(--drama-card);border:1px solid var(--drama-line);
+  border-radius:999px;padding:7px 14px;min-width:210px;transition:.2s;
+}
+.drama-search:focus-within{border-color:var(--drama-accent2);box-shadow:0 0 0 3px rgba(57,208,200,.14)}
+.drama-search input{
+  background:none;border:none;outline:none;color:var(--drama-text);
+  font-size:13.5px;width:100%;
+}
+.drama-search input::placeholder{color:#64708c}
+.drama-search svg{width:15px;height:15px;flex-shrink:0;stroke:var(--drama-dim)}
+.drama-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border-radius:999px;padding:9px 20px;font-size:14px;font-weight:600;
+  transition:.22s;white-space:nowrap;
+}
+.drama-btn-primary{
+  background:linear-gradient(135deg,var(--drama-accent),#e14b6c);
+  color:#fff;box-shadow:0 8px 20px rgba(255,90,95,.3);
+}
+.drama-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,90,95,.42)}
+.drama-btn-ghost{
+  border:1px solid var(--drama-line);color:var(--drama-text);
+  background:rgba(255,255,255,.03);
+}
+.drama-btn-ghost:hover{border-color:var(--drama-accent2);color:var(--drama-accent2)}
+.drama-burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--drama-line);place-items:center}
+.drama-burger span{display:block;width:18px;height:2px;background:var(--drama-text);position:relative}
+.drama-burger span::before,.drama-burger span::after{
+  content:"";position:absolute;left:0;width:18px;height:2px;background:var(--drama-text);
+}
+.drama-burger span::before{top:-6px}
+.drama-burger span::after{top:6px}
+
+/* ===== 首屏 ===== */
+.drama-hero{padding:52px 0 26px;position:relative;overflow:hidden}
+.drama-hero::before{
+  content:"";position:absolute;inset:-20% -10% auto auto;width:620px;height:620px;
+  background:radial-gradient(circle,rgba(255,90,95,.18),transparent 68%);
+  pointer-events:none;
+}
+.drama-hero::after{
+  content:"";position:absolute;left:-180px;bottom:-260px;width:520px;height:520px;
+  background:radial-gradient(circle,rgba(57,208,200,.14),transparent 68%);
+  pointer-events:none;
+}
+.drama-hero-grid{display:grid;grid-template-columns:6fr 4fr;gap:44px;align-items:center;position:relative;z-index:1}
+.drama-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:.14em;color:var(--drama-accent2);
+  border:1px solid rgba(57,208,200,.35);border-radius:999px;padding:5px 14px;margin-bottom:18px;
+}
+.drama-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--drama-accent2);display:inline-block;animation:dramaPulse 2s infinite}
+@keyframes dramaPulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1.drama-h1{
+  font-size:clamp(38px,5.4vw,64px);line-height:1.1;font-weight:900;letter-spacing:.01em;
+  background:linear-gradient(100deg,#fff 20%,#ffd9d1 55%,var(--drama-accent) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.drama-h1-sub{color:var(--drama-amber);font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.04em;margin-bottom:16px}
+.drama-hero-desc{color:#b9c4da;font-size:15.5px;max-width:560px;margin-bottom:22px}
+.drama-hero-desc strong{color:#fff;font-weight:600}
+.drama-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.drama-stats{display:flex;gap:34px;flex-wrap:wrap}
+.drama-stat-num{font-size:26px;font-weight:800;color:#fff;line-height:1.2}
+.drama-stat-num small{font-size:14px;color:var(--drama-accent2);font-weight:600;margin-left:2px}
+.drama-stat-label{font-size:12.5px;color:var(--drama-dim);letter-spacing:.04em}
+
+/* 首屏主视觉：剧集封面墙 */
+.drama-hero-visual{position:relative}
+.drama-poster-stack{position:relative;height:400px}
+.drama-poster{
+  position:absolute;border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 50px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.09);
+  transition:transform .35s;
+}
+.drama-poster:hover{transform:translateY(-8px) scale(1.02);z-index:5}
+.drama-poster svg{width:100%;height:100%}
+.drama-poster-p1{width:56%;height:74%;left:0;top:8%;z-index:3}
+.drama-poster-p2{width:46%;height:56%;right:0;top:0;z-index:2}
+.drama-poster-p3{width:44%;height:50%;right:6%;bottom:0;z-index:4}
+.drama-hero-badge{
+  position:absolute;left:-14px;bottom:6%;z-index:6;
+  background:rgba(22,31,48,.94);border:1px solid var(--drama-line);
+  border-radius:12px;padding:10px 16px;font-size:12.5px;color:#cdd6e8;
+  display:flex;align-items:center;gap:9px;box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+.drama-hero-badge b{color:var(--drama-accent);font-size:16px}
+
+/* ===== 通用段落 ===== */
+.drama-section{padding:58px 0}
+.drama-sec-head{margin-bottom:30px}
+.drama-sec-tag{
+  font-size:12px;letter-spacing:.16em;color:var(--drama-accent);
+  font-weight:700;display:block;margin-bottom:8px;
+}
+.drama-sec-title{font-size:clamp(23px,3vw,31px);font-weight:800;line-height:1.25;letter-spacing:.01em}
+.drama-sec-title em{font-style:normal;color:var(--drama-accent2)}
+.drama-sec-desc{color:var(--drama-dim);font-size:14.5px;margin-top:9px;max-width:760px}
+
+/* 关键词深度解析 */
+.drama-about{background:linear-gradient(180deg,var(--drama-ink2),var(--drama-ink));border-top:1px solid var(--drama-line);border-bottom:1px solid var(--drama-line)}
+.drama-about-grid{display:grid;grid-template-columns:1fr;gap:0}
+.drama-about-copy{columns:2;column-gap:44px;font-size:15px;color:#bcc6dc;text-align:justify}
+.drama-about-copy p{margin-bottom:18px;break-inside:avoid}
+.drama-about-copy h3{
+  font-size:16.5px;color:#fff;font-weight:700;margin-bottom:8px;
+  column-span:all;padding-left:12px;border-left:3px solid var(--drama-accent);line-height:1.4;
+}
+.drama-about-copy strong{color:var(--drama-amber);font-weight:600}
+.drama-about-copy a{color:var(--drama-accent2)}
+
+/* 焦点内容 */
+.drama-feature-grid{display:grid;grid-template-columns:1.55fr 1fr 1fr;gap:20px}
+.drama-feature-main{grid-row:span 2}
+.drama-card{
+  background:var(--drama-card);border:1px solid var(--drama-line);
+  border-radius:var(--drama-radius);overflow:hidden;transition:.28s;
+  display:flex;flex-direction:column;
+}
+.drama-card:hover{transform:translateY(-5px);border-color:rgba(255,90,95,.45);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.drama-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0c1320}
+.drama-thumb svg{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.drama-card:hover .drama-thumb svg{transform:scale(1.05)}
+.drama-thumb::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 46%,rgba(8,13,22,.82));
+  pointer-events:none;
+}
+.drama-play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(255,90,95,.9);display:grid;place-items:center;z-index:3;
+  box-shadow:0 8px 24px rgba(255,90,95,.45);transition:.25s;
+}
+.drama-play svg{width:18px;height:18px;margin-left:3px}
+.drama-card:hover .drama-play{transform:translate(-50%,-50%) scale(1.12)}
+.drama-thumb-tag{
+  position:absolute;top:10px;left:10px;z-index:3;
+  background:rgba(16,24,38,.86);border:1px solid var(--drama-line);
+  color:var(--drama-accent2);font-size:11.5px;padding:3px 9px;border-radius:6px;font-weight:600;
+}
+.drama-thumb-dur{
+  position:absolute;right:10px;bottom:10px;z-index:3;
+  background:rgba(0,0,0,.65);font-size:11.5px;color:#dfe6f3;padding:2px 8px;border-radius:5px;
+}
+.drama-card-body{padding:16px 17px 18px;display:flex;flex-direction:column;flex:1}
+.drama-card-title{font-size:16px;font-weight:700;line-height:1.45;margin-bottom:6px}
+.drama-feature-main .drama-card-title{font-size:20px}
+.drama-card-text{font-size:13.5px;color:var(--drama-dim);margin-bottom:12px;flex:1}
+.drama-card-meta{display:flex;align-items:center;gap:8px;font-size:12px;color:#7e8aa4;flex-wrap:wrap}
+.drama-avatar{
+  width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;font-weight:800;color:#0c1320;flex-shrink:0;
+}
+.drama-card-actions{display:flex;gap:6px;margin-top:13px;border-top:1px solid rgba(42,53,80,.7);padding-top:11px}
+.drama-act{
+  font-size:12px;color:#8b97b1;display:inline-flex;align-items:center;gap:4px;
+  padding:4px 8px;border-radius:7px;transition:.2s;
+}
+.drama-act:hover{background:rgba(255,255,255,.06);color:#fff}
+.drama-act.is-liked{color:var(--drama-accent)}
+.drama-act.is-saved{color:var(--drama-amber)}
+
+/* 视频流 */
+.drama-filter{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px}
+.drama-chip{
+  font-size:13px;padding:6px 15px;border-radius:999px;
+  border:1px solid var(--drama-line);color:var(--drama-dim);transition:.2s;
+}
+.drama-chip:hover{border-color:var(--drama-accent2);color:var(--drama-accent2)}
+.drama-chip.is-active{background:var(--drama-accent);border-color:var(--drama-accent);color:#fff;font-weight:600}
+.drama-stream{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+/* 专题 */
+.drama-topics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.drama-topic{
+  position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;
+  border:1px solid var(--drama-line);
+}
+.drama-topic svg{position:absolute;inset:0;width:100%;height:100%}
+.drama-topic-info{
+  position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:18px 16px;background:linear-gradient(180deg,transparent 30%,rgba(8,13,22,.92));
+}
+.drama-topic-info h3{font-size:16px;font-weight:800;margin-bottom:5px}
+.drama-topic-info p{font-size:12.5px;color:#aeb9cf;margin-bottom:9px;line-height:1.5}
+.drama-topic-state{
+  align-self:flex-start;font-size:11px;padding:2px 9px;border-radius:5px;
+  background:rgba(57,208,200,.16);color:var(--drama-accent2);border:1px solid rgba(57,208,200,.3);
+}
+.drama-topic-state.is-hot{background:rgba(255,90,95,.16);color:var(--drama-accent);border-color:rgba(255,90,95,.34)}
+
+/* 创作者 */
+.drama-creators{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.drama-creator{
+  background:var(--drama-card);border:1px solid var(--drama-line);border-radius:var(--drama-radius);
+  padding:20px;display:flex;gap:14px;transition:.25s;
+}
+.drama-creator:hover{border-color:rgba(57,208,200,.45);transform:translateY(-4px)}
+.drama-creator-avatar{
+  width:54px;height:54px;border-radius:16px;flex-shrink:0;
+  display:grid;place-items:center;font-weight:900;font-size:21px;color:#0c1320;
+}
+.drama-creator h3{font-size:15.5px;font-weight:800;margin-bottom:2px}
+.drama-creator-field{font-size:12px;color:var(--drama-accent2);margin-bottom:7px}
+.drama-creator-bio{font-size:12.5px;color:var(--drama-dim);line-height:1.6;margin-bottom:9px}
+.drama-creator-nums{display:flex;gap:14px;font-size:11.5px;color:#7e8aa4}
+.drama-creator-nums b{color:#fff;font-size:13px}
+
+/* 评论 */
+.drama-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.drama-review{
+  background:var(--drama-card);border:1px solid var(--drama-line);border-radius:14px;
+  padding:18px;position:relative;
+}
+.drama-review::before{
+  content:"“";position:absolute;right:16px;top:2px;
+  font-size:46px;color:rgba(255,90,95,.22);font-family:Georgia,serif;line-height:1;
+}
+.drama-review-text{font-size:13.5px;color:#c3cddf;margin-bottom:13px;line-height:1.75}
+.drama-review-user{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--drama-dim)}
+.drama-review-user b{color:#fff;font-size:12.5px;font-weight:600}
+
+/* 动态 */
+.drama-news{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.drama-news-item{
+  display:flex;gap:14px;padding:16px 18px;background:var(--drama-card);
+  border:1px solid var(--drama-line);border-radius:12px;align-items:flex-start;
+  transition:.22s;
+}
+.drama-news-item:hover{border-color:rgba(255,196,107,.42)}
+.drama-news-date{
+  font-size:12px;color:var(--drama-amber);font-weight:700;flex-shrink:0;
+  border-right:1px solid var(--drama-line);padding-right:14px;line-height:1.5;text-align:center;
+}
+.drama-news-date small{display:block;color:var(--drama-dim);font-size:10.5px;font-weight:400;letter-spacing:.06em}
+.drama-news-item h3{font-size:14.5px;font-weight:700;margin-bottom:3px;line-height:1.5}
+.drama-news-item p{font-size:12.5px;color:var(--drama-dim);line-height:1.6}
+
+/* FAQ */
+.drama-faq{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:11px}
+.drama-faq details{
+  background:var(--drama-card);border:1px solid var(--drama-line);border-radius:12px;
+  padding:0 20px;transition:.22s;
+}
+.drama-faq details[open]{border-color:rgba(57,208,200,.45)}
+.drama-faq summary{
+  cursor:pointer;list-style:none;padding:16px 0;font-size:15px;font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+}
+.drama-faq summary::-webkit-details-marker{display:none}
+.drama-faq summary::after{
+  content:"+";font-size:20px;color:var(--drama-accent);font-weight:400;transition:.2s;flex-shrink:0;
+}
+.drama-faq details[open] summary::after{content:"−";color:var(--drama-accent2)}
+.drama-faq-body{padding:0 0 17px;font-size:13.5px;color:var(--drama-dim);line-height:1.8}
+
+/* 联系 */
+.drama-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.drama-contact-box{
+  background:linear-gradient(150deg,var(--drama-card),#111a29);
+  border:1px solid var(--drama-line);border-radius:var(--drama-radius);padding:26px;
+}
+.drama-contact-box h3{font-size:18px;font-weight:800;margin-bottom:9px}
+.drama-contact-box p{font-size:13.5px;color:var(--drama-dim);margin-bottom:16px;line-height:1.75}
+.drama-contact-list{display:flex;flex-direction:column;gap:9px;font-size:13.5px;color:#c3cddf}
+.drama-contact-list span{color:var(--drama-accent2);font-weight:600;margin-right:8px}
+.drama-form-row{display:flex;flex-direction:column;gap:11px}
+.drama-form-row input,.drama-form-row textarea{
+  background:rgba(255,255,255,.03);border:1px solid var(--drama-line);
+  border-radius:9px;padding:11px 14px;color:var(--drama-text);font-size:13.5px;
+  font-family:inherit;outline:none;transition:.2s;width:100%;resize:vertical;
+}
+.drama-form-row input:focus,.drama-form-row textarea:focus{border-color:var(--drama-accent2)}
+
+/* 页脚 */
+.drama-footer{background:#0c1320;border-top:1px solid var(--drama-line);padding:44px 0 26px;font-size:13px;color:var(--drama-dim)}
+.drama-footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;margin-bottom:30px}
+.drama-footer h4{font-size:13.5px;color:#fff;font-weight:700;margin-bottom:12px}
+.drama-footer-links{display:flex;flex-direction:column;gap:8px}
+.drama-footer-links a:hover{color:var(--drama-accent2)}
+.drama-footer-bottom{
+  border-top:1px solid var(--drama-line);padding-top:18px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12px;color:#64708c;
+}
+
+/* Toast */
+.drama-toast{
+  position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(16px);
+  background:rgba(22,31,48,.97);border:1px solid var(--drama-line);
+  color:#fff;font-size:13.5px;padding:11px 22px;border-radius:10px;
+  box-shadow:0 14px 36px rgba(0,0,0,.5);opacity:0;pointer-events:none;
+  transition:.28s;z-index:200;
+}
+.drama-toast.is-show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* 回到顶部 */
+.drama-top-btn{
+  position:fixed;right:24px;bottom:26px;width:44px;height:44px;border-radius:50%;
+  background:var(--drama-accent);color:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 26px rgba(255,90,95,.4);z-index:150;
+  opacity:0;pointer-events:none;transition:.28s;
+}
+.drama-top-btn.is-show{opacity:1;pointer-events:auto}
+.drama-top-btn:hover{transform:translateY(-3px)}
+
+/* 搜索反馈 */
+.drama-search-feedback{
+  font-size:12.5px;color:var(--drama-accent2);margin-top:-8px;margin-bottom:16px;
+  display:none;
+}
+.drama-search-feedback.is-show{display:block}
+
+/* 弹窗 */
+.drama-modal{
+  position:fixed;inset:0;z-index:300;display:none;place-items:center;
+  background:rgba(6,10,18,.78);backdrop-filter:blur(4px);padding:20px;
+}
+.drama-modal.is-show{display:grid}
+.drama-modal-card{
+  background:var(--drama-card);border:1px solid var(--drama-line);
+  border-radius:18px;padding:26px;width:min(480px,94vw);position:relative;
+}
+.drama-modal-card h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.drama-modal-card p{font-size:13.5px;color:var(--drama-dim);line-height:1.75;margin-bottom:15px}
+.drama-modal-close{
+  position:absolute;right:16px;top:12px;font-size:22px;color:var(--drama-dim);line-height:1;
+}
+.drama-modal-close:hover{color:var(--drama-accent)}
+.drama-share-row{display:flex;gap:10px;flex-wrap:wrap}
+.drama-share-item{
+  padding:8px 18px;border-radius:9px;background:rgba(255,255,255,.05);
+  border:1px solid var(--drama-line);font-size:13px;transition:.2s;
+}
+.drama-share-item:hover{border-color:var(--drama-accent2);color:var(--drama-accent2)}
+
+@media(max-width:1024px){
+  .drama-hero-grid{grid-template-columns:1fr;gap:34px}
+  .drama-poster-stack{height:330px;max-width:480px}
+  .drama-feature-grid{grid-template-columns:1fr 1fr}
+  .drama-feature-main{grid-row:auto;grid-column:span 2}
+  .drama-stream{grid-template-columns:repeat(2,1fr)}
+  .drama-topics{grid-template-columns:repeat(2,1fr)}
+  .drama-creators{grid-template-columns:1fr 1fr}
+  .drama-reviews{grid-template-columns:1fr 1fr}
+  .drama-about-copy{columns:1}
+  .drama-footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .drama-nav{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    background:rgba(16,24,38,.98);border-bottom:1px solid var(--drama-line);
+    flex-direction:column;padding:12px 4vw 16px;gap:2px;
+  }
+  .drama-nav.is-open{display:flex}
+  .drama-nav a{padding:10px 12px}
+  .drama-header{gap:12px;flex-wrap:wrap}
+  .drama-burger{display:grid;order:3}
+  .drama-head-tools{margin-left:auto;order:2}
+  .drama-search{min-width:0;width:150px}
+  .drama-head-tools .drama-btn-primary{display:none}
+  .drama-contact-grid{grid-template-columns:1fr}
+  .drama-news{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .drama-hero{padding:36px 0 18px}
+  .drama-section{padding:42px 0}
+  .drama-stats{gap:22px}
+  .drama-feature-grid{grid-template-columns:1fr}
+  .drama-feature-main{grid-column:auto}
+  .drama-stream{grid-template-columns:1fr}
+  .drama-topics{grid-template-columns:1fr 1fr}
+  .drama-creators{grid-template-columns:1fr}
+  .drama-reviews{grid-template-columns:1fr}
+  .drama-poster-stack{height:290px}
+  .drama-footer-grid{grid-template-columns:1fr}
+  .drama-hero-actions .drama-btn{flex:1;justify-content:center}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="drama-sticky">
+  <div class="drama-notice">
+    <div class="drama-container drama-notice-inner">
+      <span class="drama-notice-tag">最新</span>
+      <span class="drama-notice-text">11月19日上新：都市单元剧《雾港来信》第1-6集、纪录短片《巷口的第七年》全片，<strong>并同步开启冬季剧评征集报名</strong></span>
+      <a class="drama-notice-more" href="#drama-news">查看全部更新 →</a>
+    </div>
+  </div>
+  <header class="drama-container drama-header">
+    <a href="#drama-hero" class="drama-logo" aria-label="剧作人官方网站首页">
+      <span class="drama-logo-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 4l12 8-12 8z" fill="#fff"/></svg>
+      </span>
+      <span>
+        <span class="drama-logo-name">剧作<span>人</span></span>
+        <span class="drama-logo-sub">JUZUOREN · 追剧网站</span>
+      </span>
+    </a>
+    <nav class="drama-nav" id="dramaNav" aria-label="主导航">
+      <a href="#drama-hero">首页</a>
+      <a href="#drama-feature">焦点剧集</a>
+      <a href="#drama-stream">热门视频</a>
+      <a href="#drama-topics">专题企划</a>
+      <a href="#drama-creators">创作者</a>
+      <a href="#drama-news">官方动态</a>
+      <a href="#drama-faq">帮助</a>
+      <a href="#drama-contact">联系</a>
+    </nav>
+    <div class="drama-head-tools">
+      <label class="drama-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="dramaSearchInput" placeholder="搜索剧名 / 创作者 / 话题" aria-label="站内搜索">
+      </label>
+      <a href="#drama-contact" class="drama-btn drama-btn-primary">投稿入驻</a>
+      <button class="drama-burger" id="dramaBurger" aria-label="展开导航菜单" aria-expanded="false"><span></span></button>
+    </div>
+  </header>
+</div>
+
+<main>
+  <!-- 首屏 -->
+  <section class="drama-hero" id="drama-hero">
+    <div class="drama-container drama-hero-grid">
+      <div>
+        <span class="drama-eyebrow"><i></i>官方网站 · 品牌自营内容生态</span>
+        <h1 class="drama-h1">追剧网站</h1>
+        <div class="drama-h1-sub">好剧不散场，陪你把每一集看完</div>
+        <p class="drama-hero-desc">
+          剧作人是深耕剧集垂直领域的<strong>追剧网站</strong>官方平台。我们以<strong>原创正版、高清画质、专业剧评</strong>为核心，把散落的口碑好剧、独立短片与创作者幕后，收拢成一个值得信赖的追剧社区。从企业级内容编排到用户至上的观剧体验，这里是影迷与创作者共同生长的内容生态。
+        </p>
+        <div class="drama-hero-actions">
+          <a href="#drama-feature" class="drama-btn drama-btn-primary">进入今日焦点</a>
+          <a href="#drama-creators" class="drama-btn drama-btn-ghost">认识创作者</a>
+          <button class="drama-btn drama-btn-ghost" id="dramaShareHero">分享本站</button>
+        </div>
+        <div class="drama-stats">
+          <div>
+            <div class="drama-stat-num">3,860<small>+</small></div>
+            <div class="drama-stat-label">已收录剧集与短片</div>
+          </div>
+          <div>
+            <div class="drama-stat-num">412<small>位</small></div>
+            <div class="drama-stat-label">签约与入驻创作者</div>
+          </div>
+          <div>
+            <div class="drama-stat-num">96.4<small>%</small></div>
+            <div class="drama-stat-label">社区口碑好评率</div>
+          </div>
+        </div>
+      </div>
+      <div class="drama-hero-visual">
+        <div class="drama-poster-stack">
+          <div class="drama-poster drama-poster-p1">
+            <svg viewBox="0 0 320 420" role="img" aria-label="都市单元剧《雾港来信》主视觉海报">
+              <defs>
+                <linearGradient id="dramaG1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1b2b46"/><stop offset=".55" stop-color="#2b4a6e"/><stop offset="1" stop-color="#0e1a2a"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="420" fill="url(#dramaG1)"/>
+              <circle cx="250" cy="90" r="52" fill="#ffc46b" opacity=".7"/>
+              <circle cx="250" cy="90" r="72" fill="none" stroke="#ffc46b" stroke-opacity=".25" stroke-width="1"/>
+              <path d="M0 300 Q70 250 140 292 T320 268 V420 H0Z" fill="#0a1622" opacity=".85"/>
+              <path d="M0 330 Q90 300 170 336 T320 312 V420 H0Z" fill="#08111b"/>
+              <rect x="34" y="34" width="70" height="20" rx="4" fill="#ff5a5f"/>
+              <text x="69" y="49" font-size="12" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="700">独播</text>
+              <text x="34" y="372" font-size="30" fill="#ffffff" font-family="sans-serif" font-weight="900">雾港来信</text>
+              <text x="34" y="396" font-size="13" fill="#9fb2cc" font-family="sans-serif" letter-spacing="3">都市 · 单元剧 · 6集</text>
+            </svg>
+          </div>
+          <div class="drama-poster drama-poster-p2">
+            <svg viewBox="0 0 260 240" role="img" aria-label="纪录短片《巷口的第七年》封面">
+              <defs>
+                <linearGradient id="dramaG2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ff8a5b"/><stop offset="1" stop-color="#b2354f"/>
+                </linearGradient>
+              </defs>
+              <rect width="260" height="240" fill="url(#dramaG2)"/>
+              <circle cx="70" cy="70" r="34" fill="#ffe3b0" opacity=".55"/>
+              <rect x="120" y="60" width="20" height="140" fill="#3c1a24" opacity=".55"/>
+              <rect x="150" y="90" width="20" height="110" fill="#3c1a24" opacity=".4"/>
+              <path d="M0 190 H260 V240 H0Z" fill="#2a1018" opacity=".8"/>
+              <text x="18" y="212" font-size="19" fill="#fff" font-family="sans-serif" font-weight="800">巷口的第七年</text>
+            </svg>
+          </div>
+          <div class="drama-poster drama-poster-p3">
+            <svg viewBox="0 0 250 220" role="img" aria-label="悬疑剧《回声档案》系列封面">
+              <defs>
+                <linearGradient id="dramaG3" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#12343a"/><stop offset="1" stop-color="#06171c"/>
+                </linearGradient>
+              </defs>
+              <rect width="250" height="220" fill="url(#dramaG3)"/>
+              <circle cx="125" cy="96" r="46" fill="none" stroke="#39d0c8" stroke-width="1.4" stroke-dasharray="4 7" opacity=".8"/>
+              <circle cx="125" cy="96" r="26" fill="none" stroke="#39d0c8" stroke-width="2" opacity=".55"/>
+              <path d="M125 70 V96 L146 108" stroke="#39d0c8" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <text x="20" y="190" font-size="18" fill="#e8ecf5" font-family="sans-serif" font-weight="800">回声档案</text>
+            </svg>
+          </div>
+        </div>
+        <div class="drama-hero-badge"><b>24</b>部新剧本周持续更新中</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关键词定位与深度解析 -->
+  <section class="drama-section drama-about" id="drama-about">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">品牌深度解析</span>
+        <h2 class="drama-sec-title">为什么我们需要一个叫“<em>追剧网站</em>”的地方</h2>
+        <p class="drama-sec-desc">从看剧这件事出发，聊一聊剧作人作为追剧网站官方平台的内容逻辑、社区规则与长期主义。</p>
+      </div>
+      <div class="drama-about-copy">
+        <h3>一、追剧网站的定位：不是片库，而是内容生态</h3>
+        <p>很多人第一次听到“追剧网站”四个字，会下意识地把它理解成一个堆满片单的资源仓库。但剧作人从创立第一天起就没有走这条路。我们把自己定义为一家深耕剧集垂直领域的<strong>内容企业</strong>：一边是官方发布的原创剧集与独立短片，一边是围绕剧集生长出来的剧评、幕后、访谈和同好讨论。首页看上去是一张视频封面墙，背后其实是一整套从选题策划、拍摄制作、审核上线到社区运营的完整链路。</p>
+        <p>这套链路决定了页面上的每一条内容都有人负责。焦点剧集有主编室排期，专题企划有编辑团队跟进，创作者矩阵有运营一对一沟通，就连评论区里的一条长评，也可能被编辑挑出来做成下一期的话题。我们相信，追剧网站的核心竞争力不在于“有多少部”，而在于“每一部是否被认真对待”。</p>
+        <h3>二、内容生态怎么长出来</h3>
+        <p>剧作人的内容生态大致分成三层。第一层是<strong>官方自制</strong>，由品牌内容中心主导的单元剧、纪录短片与人物访谈，风格统一、更新稳定，是平台品质的压舱石。第二层是<strong>创作者合作</strong>，签约与入驻的创作者带来大量多元题材，从城市探索到萌宠日常，从手作 DIY 到音乐现场，题材的包容性让社区始终保持活力。第三层是<strong>用户共创</strong>，投稿、剧评、投票、挑战赛，让普通影迷也能从观众变成参与者。三层内容彼此导流，互相喂养，形成真正的生态而不是孤岛。</p>
+        <p>为了让这个生态运转得更顺，我们在产品上做了不少克制。比如不做过度的自动播放，不把推荐权重完全交给完播率，而是在算法之外保留一块“编辑精选”的位置。算法懂你的习惯，编辑懂内容的分量，二者结合，才不至于让好剧被流量埋掉。</p>
+        <h3>三、高清与正版：追剧体验的底线</h3>
+        <p>作为追剧网站官方平台，高清是基本要求，正版是绝对底线。我们与版权方、制作团队保持长期合作，所有上线内容均经过授权确认；技术侧则持续优化码率自适应与播放器交互，让不同网络环境下的用户都能获得稳定的观感。对创作者而言，正版意味着劳动被尊重；对用户而言，正版意味着看得安心、看得长久。口碑不是喊出来的，是一次次稳定播放、一条条真实评论积累出来的。</p>
+        <p>我们也清楚，追剧网站的“追”字，本质是一种陪伴。深夜加班后打开一集短剧，通勤路上补完上周更新的单元，周末和孩子一起看一部动画短片——这些时刻构成了平台真正的价值。因此我们在内容编排上格外注意节奏：一周内既有高强度的悬疑连载，也有舒缓的治愈影像，让不同心情的人都能找到当下的那一部。</p>
+        <h3>四、社区规则与创作者成长</h3>
+        <p>社区要长期运营，规则必须清晰。剧作人对剧评采取“真实优先”的原则：可以批评，但要具体；可以热情，但不刷屏。我们设置了举报与反馈入口，也保留了人工复核环节，力求让讨论保持温度而不失分寸。对创作者，我们提供从选题建议、脚本打磨到剪辑思路的一站式支持，并定期公布新人榜与口碑榜，让认真做内容的人被看见。</p>
+        <p>这套机制的回报是可见的。过去一年，站内长评数量增长明显，创作者投稿的题材跨度也越来越大。有创作者把镜头对准自家楼下的早餐铺，拍成系列短片，最后成了站内口碑榜的常客；也有用户因为一条评论被编辑邀请，第一次尝试写完整剧评。这些看似微小的成长，正是追剧网站最想留下的东西。</p>
+        <h3>五、面向未来的长期主义</h3>
+        <p>剧集行业变化很快，题材风口几年一轮。剧作人选择用长期主义对抗不确定：持续投入原创，持续扶持创作者，持续打磨社区体验。我们不追求短期爆量，更在意三年后打开这个追剧网站时，用户是否还能找到熟悉的味道——一栏固定更新的焦点剧集，一群稳定输出的创作者，一片愿意认真说话的评论区。</p>
+        <p>如果你也相信好剧值得被认真对待，欢迎在这里停留久一点。看一集，写一句，投一次稿，都是对这个内容生态的参与。追剧网站的故事，从来不是平台单方面写成的，它由每一个按下播放键的人共同续写。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 焦点剧集 -->
+  <section class="drama-section" id="drama-feature">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">今日焦点</span>
+        <h2 class="drama-sec-title">编辑室本周主推 · <em>五部值得留意的剧</em></h2>
+        <p class="drama-sec-desc">由主编室与运营团队共同挑选，兼顾口碑、题材与更新节奏，每一部都附有编辑手记。</p>
+      </div>
+      <div class="drama-feature-grid">
+        <article class="drama-card drama-feature-main">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 640 360" role="img" aria-label="都市单元剧《雾港来信》第一集封面">
+              <defs>
+                <linearGradient id="dramaF1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#182a44"/><stop offset=".5" stop-color="#2f5274"/><stop offset="1" stop-color="#0d1826"/>
+                </linearGradient>
+              </defs>
+              <rect width="640" height="360" fill="url(#dramaF1)"/>
+              <circle cx="500" cy="86" r="46" fill="#ffc46b" opacity=".7"/>
+              <path d="M0 250 Q120 200 260 242 T640 218 V360 H0Z" fill="#0a1420" opacity=".8"/>
+              <path d="M0 288 Q150 258 300 292 T640 268 V360 H0Z" fill="#08111b"/>
+              <rect x="34" y="28" width="78" height="22" rx="4" fill="#ff5a5f"/>
+              <text x="73" y="44" font-size="12" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="700">官方发布</text>
+            </svg>
+            <span class="drama-thumb-tag">官方自制</span>
+            <span class="drama-thumb-dur">42′18″</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《雾港来信》第一集：一封寄错三十年的挂号信</h3>
+            <p class="drama-card-text">都市单元剧开篇。邮递员在旧仓里翻出一封 1996 年的挂号信，收件人早已搬离。送信的过程像一次缓慢的城市考古，把三个家庭的旧账一页页翻回。镜头克制，台词留白，适合安静地看完再回头想想。</p>
+            <div class="drama-card-meta">
+              <span class="drama-avatar" style="background:#ffc46b">周</span>
+              <span>周叙白</span><span>·</span><span>11月19日</span><span>·</span><span>9.2 分</span>
+            </div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>2,148</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+              <button class="drama-act" data-drama-comment>评论 <b>376</b></button>
+              <button class="drama-act" data-drama-copy>复制链接</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="drama-card">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="纪录短片《巷口的第七年》工作照封面">
+              <defs>
+                <linearGradient id="dramaF2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ff9a6a"/><stop offset="1" stop-color="#a93350"/>
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#dramaF2)"/>
+              <circle cx="120" cy="88" r="38" fill="#ffe6b8" opacity=".6"/>
+              <rect x="220" y="70" width="26" height="180" fill="#3a1620" opacity=".5"/>
+              <rect x="270" y="110" width="22" height="140" fill="#3a1620" opacity=".38"/>
+              <path d="M0 210 H480 V270 H0Z" fill="#2a1018" opacity=".7"/>
+            </svg>
+            <span class="drama-thumb-tag">纪录短片</span>
+            <span class="drama-thumb-dur">18′05″</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《巷口的第七年》：一家早餐铺的清晨四点</h3>
+            <p class="drama-card-text">连续跟拍七个冬天的街边小店，蒸汽、油条与老顾客的寒暄，构成最稳的日常影像。</p>
+            <div class="drama-card-meta">
+              <span class="drama-avatar" style="background:#ff9a6a">林</span>
+              <span>林晚巷</span><span>·</span><span>11月18日</span>
+            </div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,432</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+              <button class="drama-act" data-drama-copy>复制链接</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="drama-card">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="悬疑剧《回声档案》第二季封面">
+              <defs>
+                <linearGradient id="dramaF3" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#123a40"/><stop offset="1" stop-color="#06171c"/>
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#dramaF3)"/>
+              <circle cx="240" cy="120" r="66" fill="none" stroke="#39d0c8" stroke-width="1.4" stroke-dasharray="5 9" opacity=".7"/>
+              <circle cx="240" cy="120" r="34" fill="none" stroke="#39d0c8" stroke-width="2" opacity=".5"/>
+              <path d="M240 84 V120 L276 140" stroke="#39d0c8" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            </svg>
+            <span class="drama-thumb-tag">连载中</span>
+            <span class="drama-thumb-dur">36′42″</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《回声档案》第二季：录音带里的第三个人</h3>
+            <p class="drama-card-text">悬疑系列回归。一段被反复消磁的录音，牵出旧案里从未出现的第三位在场者。</p>
+            <div class="drama-card-meta">
+              <span class="drama-avatar" style="background:#39d0c8">白</span>
+              <span>白鹿鸣</span><span>·</span><span>11月17日</span>
+            </div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>3,906</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+              <button class="drama-act" data-drama-copy>复制链接</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="drama-card">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="人物访谈《镜头背后》新一期封面">
+              <defs>
+                <linearGradient id="dramaF4" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#43335e"/><stop offset="1" stop-color="#1d2440"/>
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#dramaF4)"/>
+              <circle cx="160" cy="130" r="48" fill="#b79cf0" opacity=".55"/>
+              <circle cx="330" cy="130" r="48" fill="#7fd8d2" opacity=".45"/>
+              <rect x="212" y="76" width="56" height="108" rx="10" fill="#0f1728" opacity=".8"/>
+              <text x="240" y="140" font-size="15" fill="#e8ecf5" text-anchor="middle" font-family="sans-serif">访谈</text>
+            </svg>
+            <span class="drama-thumb-tag">人物访谈</span>
+            <span class="drama-thumb-dur">52′30″</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《镜头背后》第 14 期：与剪辑师聊一场雨的节奏</h3>
+            <p class="drama-card-text">一场两分钟的夜雨戏，被剪了四十多个版本。听剪辑师讲讲时间感是怎么被“剪”出来的。</p>
+            <div class="drama-card-meta">
+              <span class="drama-avatar" style="background:#b79cf0">苏</span>
+              <span>苏木工作室</span><span>·</span><span>11月16日</span>
+            </div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,120</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+              <button class="drama-act" data-drama-copy>复制链接</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="drama-card">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="短剧《末班地铁的第十站》封面">
+              <defs>
+                <linearGradient id="dramaF5" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0e3a4a"/><stop offset="1" stop-color="#0a1522"/>
+                </linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#dramaF5)"/>
+              <path d="M0 190 H480 V270 H0Z" fill="#071019"/>
+              <rect x="70" y="120" width="120" height="66" rx="6" fill="#1b3346" stroke="#39d0c8" stroke-opacity=".4"/>
+              <rect x="88" y="134" width="26" height="20" fill="#ffc46b" opacity=".75"/>
+              <rect x="122" y="134" width="26" height="20" fill="#ffc46b" opacity=".5"/>
+              <circle cx="370" cy="120" r="40" fill="none" stroke="#39d0c8" stroke-width="1.5" opacity=".55"/>
+            </svg>
+            <span class="drama-thumb-tag">短剧</span>
+            <span class="drama-thumb-dur">15′12″</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《末班地铁的第十站》：加班夜里的陌生乘客</h3>
+            <p class="drama-card-text">短剧单元，十五分钟一集。末班地铁上，两个人因为一张掉落的票根聊了一路。</p>
+            <div class="drama-card-meta">
+              <span class="drama-avatar" style="background:#7fd8d2">陈</span>
+              <span>陈灯下</span><span>·</span><span>11月15日</span>
+            </div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>2,673</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+              <button class="drama-act" data-drama-copy>复制链接</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门视频流 -->
+  <section class="drama-section" id="drama-stream" style="background:var(--drama-ink2);border-top:1px solid var(--drama-line);border-bottom:1px solid var(--drama-line)">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">热门视频流</span>
+        <h2 class="drama-sec-title">社区正在讨论的 <em>九条内容</em></h2>
+        <p class="drama-sec-desc">按题材筛选，点击标签即可过滤；每条内容都标注了更新状态与编辑推荐理由。</p>
+      </div>
+      <div class="drama-filter" id="dramaFilter">
+        <button class="drama-chip is-active" data-drama-filter="all">全部</button>
+        <button class="drama-chip" data-drama-filter="剧集">剧集</button>
+        <button class="drama-chip" data-drama-filter="纪实">纪实</button>
+        <button class="drama-chip" data-drama-filter="访谈">访谈</button>
+        <button class="drama-chip" data-drama-filter="幕后">幕后</button>
+      </div>
+      <p class="drama-search-feedback" id="dramaSearchFeedback"></p>
+      <div class="drama-stream" id="dramaStream">
+        <article class="drama-card" data-drama-cat="剧集">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="都市单元剧《雾港来信》第二集封面">
+              <rect width="480" height="270" fill="#1c3048"/>
+              <circle cx="140" cy="90" r="42" fill="#ffc46b" opacity=".6"/>
+              <path d="M0 200 Q160 170 320 202 T480 186 V270 H0Z" fill="#0a1522"/>
+            </svg>
+            <span class="drama-thumb-tag">剧集</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《雾港来信》第二集：邮局后面的旧地图</h3>
+            <p class="drama-card-text">一张手绘地图把线索指向城郊。节奏比首集更快，但结尾依然慢下来。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#ffc46b">周</span><span>周叙白</span><span>·</span><span>8,204 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,206</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="纪实">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="纪实影像《菜市场的最后一盏灯》封面">
+              <rect width="480" height="270" fill="#8a5a35"/>
+              <circle cx="360" cy="76" r="34" fill="#ffe0a3" opacity=".7"/>
+              <rect x="60" y="150" width="150" height="80" fill="#4a2c18" opacity=".7"/>
+              <path d="M0 214 H480 V270 H0Z" fill="#2c1a0e" opacity=".8"/>
+            </svg>
+            <span class="drama-thumb-tag">纪实</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《菜市场的最后一盏灯》：收摊后的三十分钟</h3>
+            <p class="drama-card-text">跟着摊主收摊，听他们算账、留菜、互相打趣，一天才算真正结束。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#ffb080">胡</span><span>胡桃夹子</span><span>·</span><span>6,780 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>942</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="访谈">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="访谈节目《导演的抽屉》封面">
+              <rect width="480" height="270" fill="#2f2a55"/>
+              <circle cx="150" cy="130" r="46" fill="#9d8cf0" opacity=".5"/>
+              <circle cx="330" cy="130" r="46" fill="#f0a8c8" opacity=".4"/>
+              <rect x="210" y="100" width="60" height="60" rx="8" fill="#121a2c"/>
+            </svg>
+            <span class="drama-thumb-tag">访谈</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《导演的抽屉》第 9 期：那些没拍进正片的镜头</h3>
+            <p class="drama-card-text">三位导演带来各自被删掉的开场，聊聊取舍背后的判断标准。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#9d8cf0">苏</span><span>苏木工作室</span><span>·</span><span>5,410 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>803</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="幕后">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="幕后花絮《一场夜戏怎么拍》封面">
+              <rect width="480" height="270" fill="#0f2a33"/>
+              <rect x="80" y="70" width="90" height="130" rx="6" fill="#1d4350"/>
+              <circle cx="330" cy="110" r="36" fill="#39d0c8" opacity=".45"/>
+              <path d="M0 210 H480 V270 H0Z" fill="#08161c"/>
+            </svg>
+            <span class="drama-thumb-tag">幕后</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">幕后花絮：一场夜戏的灯位与走位</h3>
+            <p class="drama-card-text">实测记录。四盏灯、两条轨道、十二次重来，把“氛围感”拆成可复用的方法。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#39d0c8">白</span><span>白鹿鸣</span><span>·</span><span>7,930 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,357</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="剧集">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="家庭剧《厨房里有光》封面">
+              <rect width="480" height="270" fill="#6b4a2a"/>
+              <circle cx="240" cy="120" r="52" fill="#ffdca0" opacity=".6"/>
+              <rect x="150" y="150" width="180" height="80" rx="8" fill="#3a2412"/>
+            </svg>
+            <span class="drama-thumb-tag">剧集</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《厨房里有光》第四集：一碗面的和解</h3>
+            <p class="drama-card-text">家庭剧的日常质地。父子之间那点拧巴，最后靠一顿夜宵松了口。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#ffdca0">叶</span><span>叶小满</span><span>·</span><span>9,102 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,844</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="纪实">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="城市影像《沿着高架走一夜》封面">
+              <rect width="480" height="270" fill="#14273a"/>
+              <path d="M0 180 H480 V270 H0Z" fill="#081320"/>
+              <rect x="120" y="120" width="240" height="12" fill="#2c4c66"/>
+              <circle cx="90" cy="90" r="26" fill="#7fd8d2" opacity=".5"/>
+            </svg>
+            <span class="drama-thumb-tag">纪实</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《沿着高架走一夜》：凌晨两点的城市切片</h3>
+            <p class="drama-card-text">一镜到底的路面观察。霓虹、便利店、代驾司机，构成城市的另一张脸。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#7fd8d2">陈</span><span>陈灯下</span><span>·</span><span>4,866 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>688</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="幕后">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="剧本工作台《分镜第一稿》封面">
+              <rect width="480" height="270" fill="#3a3040"/>
+              <rect x="90" y="60" width="120" height="150" rx="5" fill="#efe6d8" opacity=".85"/>
+              <rect x="240" y="80" width="110" height="130" rx="5" fill="#d9cdbb" opacity=".7"/>
+              <path d="M110 200 l40 40" stroke="#ff5a5f" stroke-width="3"/>
+            </svg>
+            <span class="drama-thumb-tag">幕后</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">剧本工作台：从一句话梗概到分镜第一稿</h3>
+            <p class="drama-card-text">完整展示一集短剧的案头流程，附可下载的分镜模板与排版建议。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#d9cdbb">林</span><span>林晚巷</span><span>·</span><span>3,972 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>745</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="访谈">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="创作者对谈《第一次被差评》封面">
+              <rect width="480" height="270" fill="#26364f"/>
+              <circle cx="170" cy="130" r="44" fill="#ff9a6a" opacity=".5"/>
+              <circle cx="320" cy="130" r="44" fill="#7fd8d2" opacity=".45"/>
+              <path d="M210 130 H280" stroke="#e8ecf5" stroke-width="2" stroke-dasharray="6 6" opacity=".6"/>
+            </svg>
+            <span class="drama-thumb-tag">访谈</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">创作者对谈：第一次收到差评的那天晚上</h3>
+            <p class="drama-card-text">两位签约创作者坦诚复盘，聊被批评之后如何继续拍下去。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#ff9a6a">林</span><span>林晚巷</span><span>·</span><span>5,208 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>911</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+        <article class="drama-card" data-drama-cat="剧集">
+          <div class="drama-thumb">
+            <svg viewBox="0 0 480 270" role="img" aria-label="青春短剧《夏天的最后一场球》封面">
+              <rect width="480" height="270" fill="#1f4d63"/>
+              <circle cx="360" cy="80" r="40" fill="#ffe08a" opacity=".7"/>
+              <path d="M0 200 Q180 170 360 206 T480 190 V270 H0Z" fill="#0f2a38"/>
+            </svg>
+            <span class="drama-thumb-tag">剧集</span>
+            <span class="drama-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3l15 9-15 9z" fill="#fff"/></svg></span>
+          </div>
+          <div class="drama-card-body">
+            <h3 class="drama-card-title">《夏天的最后一场球》：终场哨响之后</h3>
+            <p class="drama-card-text">青春短剧收尾集。输掉比赛的那群人，在球场上又多待了半小时。</p>
+            <div class="drama-card-meta"><span class="drama-avatar" style="background:#ffe08a">叶</span><span>叶小满</span><span>·</span><span>7,366 次浏览</span></div>
+            <div class="drama-card-actions">
+              <button class="drama-act" data-drama-like><span>♡</span> 喜欢 <b>1,502</b></button>
+              <button class="drama-act" data-drama-save><span>☆</span> 收藏</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 专题企划 -->
+  <section class="drama-section" id="drama-topics">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">专题企划</span>
+        <h2 class="drama-sec-title">四个正在进行中的 <em>内容企划</em></h2>
+        <p class="drama-sec-desc">以专题方式组织内容，让一个话题被看得更完整，也让创作者的表达有更长的生命周期。</p>
+      </div>
+      <div class="drama-topics">
+        <article class="drama-topic">
+          <svg viewBox="0 0 300 400" role="img" aria-label="专题《城市夜行者》封面图">
+            <rect width="300" height="400" fill="#16283c"/>
+            <circle cx="220" cy="90" r="46" fill="#7fd8d2" opacity=".4"/>
+            <path d="M0 290 H300 V400 H0Z" fill="#0a1622"/>
+            <rect x="40" y="200" width="18" height="90" fill="#2c4c66"/>
+            <rect x="76" y="170" width="18" height="120" fill="#2c4c66" opacity=".8"/>
+          </svg>
+          <div class="drama-topic-info">
+            <h3>城市夜行者</h3>
+            <p>记录凌晨仍在运转的城市，八位创作者、十二支短片。</p>
+            <span class="drama-topic-state is-hot">已更新 9 / 12</span>
+          </div>
+        </article>
+        <article class="drama-topic">
+          <svg viewBox="0 0 300 400" role="img" aria-label="专题《一集短剧的诞生》封面图">
+            <rect width="300" height="400" fill="#3a2a44"/>
+            <rect x="60" y="110" width="180" height="22" rx="4" fill="#ffc46b" opacity=".7"/>
+            <rect x="60" y="150" width="140" height="14" rx="4" fill="#e8ecf5" opacity=".4"/>
+            <rect x="60" y="180" width="160" height="14" rx="4" fill="#e8ecf5" opacity=".3"/>
+            <circle cx="150" cy="290" r="50" fill="none" stroke="#ff9a6a" stroke-width="2" opacity=".6"/>
+          </svg>
+          <div class="drama-topic-info">
+            <h3>一集短剧的诞生</h3>
+            <p>从选题、剧本到成片，完整拆解制作流程与预算表。</p>
+            <span class="drama-topic-state">连载中 · 每周三</span>
+          </div>
+        </article>
+        <article class="drama-topic">
+          <svg viewBox="0 0 300 400" role="img" aria-label="专题《老片重看计划》封面图">
+            <rect width="300" height="400" fill="#5a3a2a"/>
+            <circle cx="110" cy="150" r="60" fill="#ffdca0" opacity=".5"/>
+            <rect x="0" y="300" width="300" height="100" fill="#2c1a10" opacity=".8"/>
+            <path d="M170 250 L250 250 L210 330 Z" fill="#8a5a35" opacity=".7"/>
+          </svg>
+          <div class="drama-topic-info">
+            <h3>老片重看计划</h3>
+            <p>请创作者重看十年前的剧，聊聊当年没看懂的部分。</p>
+            <span class="drama-topic-state">已更新 6 / 10</span>
+          </div>
+        </article>
+        <article class="drama-topic">
+          <svg viewBox="0 0 300 400" role="img" aria-label="专题《剧本围读夜》封面图">
+            <rect width="300" height="400" fill="#1f3a34"/>
+            <circle cx="150" cy="140" r="52" fill="#39d0c8" opacity=".4"/>
+            <rect x="50" y="250" width="200" height="14" rx="6" fill="#cfe6e2" opacity=".35"/>
+            <rect x="80" y="278" width="140" height="12" rx="6" fill="#cfe6e2" opacity=".25"/>
+          </svg>
+          <div class="drama-topic-info">
+            <h3>剧本围读夜</h3>
+            <p>每月一场线上围读，演员与观众共同参与，投票选出下一部。</p>
+            <span class="drama-topic-state is-hot">报名中</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 创作者矩阵 -->
+  <section class="drama-section" id="drama-creators" style="background:var(--drama-ink2);border-top:1px solid var(--drama-line);border-bottom:1px solid var(--drama-line)">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">创作者矩阵</span>
+        <h2 class="drama-sec-title">让好内容被看见的 <em>六个人</em></h2>
+        <p class="drama-sec-desc">他们来自不同领域，共同构成站内的内容生态。点击卡片可查看简介与代表作品。</p>
+      </div>
+      <div class="drama-creators">
+        <article class="drama-creator" data-drama-creator="周叙白|都市单元剧导演，擅长用克制的镜头讲普通人之间的误会与和解。代表作品《雾港来信》《晚归》系列。|47|12.6万">
+          <span class="drama-creator-avatar" style="background:#ffc46b">周</span>
+          <div>
+            <h3>周叙白</h3>
+            <div class="drama-creator-field">都市剧 · 导演</div>
+            <p class="drama-creator-bio">喜欢把镜头放在人物的手和背影上，认为留白比台词更有力量。</p>
+            <div class="drama-creator-nums"><span><b>47</b> 部作品</span><span><b>12.6万</b> 关注</span></div>
+          </div>
+        </article>
+        <article class="drama-creator" data-drama-creator="林晚巷|纪实短片创作者，连续七年记录街头小店，作品以稳定的日常观察见长。|31|8.9万">
+          <span class="drama-creator-avatar" style="background:#ff9a6a">林</span>
+          <div>
+            <h3>林晚巷</h3>
+            <div class="drama-creator-field">纪实 · 纪录短片</div>
+            <p class="drama-creator-bio">拍早餐铺、修鞋摊、旧书市，坚信“重复的日常值得被反复记录”。</p>
+            <div class="drama-creator-nums"><span><b>31</b> 部作品</span><span><b>8.9万</b> 关注</span></div>
+          </div>
+        </article>
+        <article class="drama-creator" data-drama-creator="白鹿鸣|悬疑与类型剧编剧，擅长多线叙事与声音设计，作品口碑稳定。|26|15.2万">
+          <span class="drama-creator-avatar" style="background:#39d0c8">白</span>
+          <div>
+            <h3>白鹿鸣</h3>
+            <div class="drama-creator-field">悬疑 · 编剧</div>
+            <p class="drama-creator-bio">写故事前先做声音设计，认为观众是被“听”进悬念里的。</p>
+            <div class="drama-creator-nums"><span><b>26</b> 部作品</span><span><b>15.2万</b> 关注</span></div>
+          </div>
+        </article>
+        <article class="drama-creator" data-drama-creator="苏木工作室|专注影视工业幕后与人物访谈的团队，长期输出专业向内容。|58|6.4万">
+          <span class="drama-creator-avatar" style="background:#b79cf0">苏</span>
+          <div>
+            <h3>苏木工作室</h3>
+            <div class="drama-creator-field">幕后 · 人物访谈</div>
+            <p class="drama-creator-bio">把镜头对准镜头背后的人，聊剪辑、灯光、美术与那些看不见的工种。</p>
+            <div class="drama-creator-nums"><span><b>58</b> 部作品</span><span><b>6.4万</b> 关注</span></div>
+          </div>
+        </article>
+        <article class="drama-creator" data-drama-creator="陈灯下|短剧与城市影像创作者，作品节奏轻快，擅长在通勤场景里找故事。|39|10.1万">
+          <span class="drama-creator-avatar" style="background:#7fd8d2">陈</span>
+          <div>
+            <h3>陈灯下</h3>
+            <div class="drama-creator-field">短剧 · 城市影像</div>
+            <p class="drama-creator-bio">通勤路上构思，深夜收工剪辑，相信地铁是最好的故事发生地。</p>
+            <div class="drama-creator-nums"><span><b>39</b> 部作品</span><span><b>10.1万</b> 关注</span></div>
+          </div>
+        </article>
+        <article class="drama-creator" data-drama-creator="叶小满|家庭与青春题材创作者，作品温暖细腻，多部短片入选站内口碑榜。|22|7.7万">
+          <span class="drama-creator-avatar" style="background:#ffdca0">叶</span>
+          <div>
+            <h3>叶小满</h3>
+            <div class="drama-creator-field">家庭 · 青春题材</div>
+            <p class="drama-creator-bio">擅长写饭桌上的对话，觉得一家人怎么吃饭就怎么相处。</p>
+            <div class="drama-creator-nums"><span><b>22</b> 部作品</span><span><b>7.7万</b> 关注</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评价 -->
+  <section class="drama-section" id="drama-reviews">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">社区口碑</span>
+        <h2 class="drama-sec-title">来自用户的 <em>真实反馈</em></h2>
+        <p class="drama-sec-desc">不做统一口径的赞美，只保留真实的使用感受——这是追剧网站社区的基本态度。</p>
+      </div>
+      <div class="drama-reviews">
+        <article class="drama-review">
+          <p class="drama-review-text">第一次在追剧网站把一整部单元剧看完。没有乱跳的推荐，也没有奇怪的弹窗，安静得让人愿意认真看。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#ffc46b">陆</span><b>陆一舟</b><span>· 追剧 3 年</span></div>
+        </article>
+        <article class="drama-review">
+          <p class="drama-review-text">剧评区的质量比我想象中高。有人认真写剪辑分析，也有人只是说说被哪句台词戳到。两种我都爱看。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#7fd8d2">许</span><b>许照</b><span>· 剧评作者</span></div>
+        </article>
+        <article class="drama-review">
+          <p class="drama-review-text">作为创作者，最直接的感受是反馈快。投稿之后一周内会收到编辑的修改建议，不是模板回复，是真的看过。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#ff9a6a">阿</span><b>阿野</b><span>· 入驻创作者</span></div>
+        </article>
+        <article class="drama-review">
+          <p class="drama-review-text">画质稳定，切换清晰度不中断。对我这种在地铁上看的人很友好，短剧时长也刚好。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#b79cf0">林</span><b>林可</b><span>· 通勤用户</span></div>
+        </article>
+        <article class="drama-review">
+          <p class="drama-review-text">带孩子一起看《厨房里有光》，他居然会主动问我“那个人为什么生气”。这大概就是好剧的意义。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#ffdca0">方</span><b>方宁</b><span>· 家庭用户</span></div>
+        </article>
+        <article class="drama-review">
+          <p class="drama-review-text">专题做得用心。《一集短剧的诞生》让我第一次搞清楚预算表怎么排，比零散看教程强太多。</p>
+          <div class="drama-review-user"><span class="drama-avatar" style="background:#39d0c8">程</span><b>程野</b><span>· 影视学生</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 官方动态 -->
+  <section class="drama-section" id="drama-news" style="background:var(--drama-ink2);border-top:1px solid var(--drama-line);border-bottom:1px solid var(--drama-line)">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">官方动态</span>
+        <h2 class="drama-sec-title">企业动态与 <em>内容更新日志</em></h2>
+        <p class="drama-sec-desc">定期同步平台内容排期、活动报名与产品调整，保证信息透明。</p>
+      </div>
+      <div class="drama-news">
+        <article class="drama-news-item">
+          <div class="drama-news-date">11.19<small>官方发布</small></div>
+          <div>
+            <h3>《雾港来信》正式上线，首周连更三集</h3>
+            <p>都市单元剧第一季共六集，官方发布页已开放剧评与收藏，欢迎参与讨论。</p>
+          </div>
+        </article>
+        <article class="drama-news-item">
+          <div class="drama-news-date">11.18<small>活动</small></div>
+          <div>
+            <h3>冬季剧评征集开启报名，主题“我重看的那一集”</h3>
+            <p>面向全体用户开放，优质剧评将进入编辑精选并获得站内推荐位展示。</p>
+          </div>
+        </article>
+        <article class="drama-news-item">
+          <div class="drama-news-date">11.16<small>产品</small></div>
+          <div>
+            <h3>播放器新增“记忆清晰度与进度”能力</h3>
+            <p>下次打开同一部剧时自动续接，切换设备后也可保持观看记录一致。</p>
+          </div>
+        </article>
+        <article class="drama-news-item">
+          <div class="drama-news-date">11.14<small>合作</small></div>
+          <div>
+            <h3>与三家独立制片团队达成内容合作</h3>
+            <p>后续将联合推出纪录短片系列，首批作品预计在下月排期上线。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="drama-section" id="drama-faq">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">帮助中心</span>
+        <h2 class="drama-sec-title">关于使用与入驻的 <em>常见问题</em></h2>
+        <p class="drama-sec-desc">如果你还有其他疑问，可通过下方的联系入口提交反馈，我们会在两个工作日内回复。</p>
+      </div>
+      <div class="drama-faq">
+        <details>
+          <summary>剧作人作为追剧网站，内容来源如何保证规范？</summary>
+          <div class="drama-faq-body">站内内容分为官方自制、创作者合作与授权引进三类，均在上线前完成授权确认与内容审核。我们与版权方保持长期合作，并在每条内容的详情页标注来源类型，方便用户识别。</div>
+        </details>
+        <details>
+          <summary>更新频率是怎样的？会不会追着追着断更？</summary>
+          <div class="drama-faq-body">连载内容会在专题页标注更新状态与预计排期，官方自制的单元剧与纪录短片实行固定周更。如果遇到临时调整，会通过首页公告条和官方动态同步说明，尽量不做“无声断更”。</div>
+        </details>
+        <details>
+          <summary>我可以在站内投稿吗？需要什么条件？</summary>
+          <div class="drama-faq-body">可以。任何个人或团队均可通过联系入口提交作品。我们更看重内容完成度与表达诚意，题材不限，时长从三分钟短剧到半小时纪录短片都接受。审核通过后会安排编辑对接，沟通修改与排期。</div>
+        </details>
+        <details>
+          <summary>观看时卡顿或画质不理想怎么办？</summary>
+          <div class="drama-faq-body">播放器会根据网络情况自动调整清晰度，也可以手动切换。若持续卡顿，建议检查本地网络并刷新页面。如问题依旧，请通过反馈入口说明设备型号与网络环境，技术团队会跟进排查。</div>
+        </details>
+        <details>
+          <summary>剧评和留言有什么规范？</summary>
+          <div class="drama-faq-body">我们鼓励具体、有观点的讨论。可以批评作品，但不针对个人；可以热情推荐，但不刷屏重复。涉及剧透的内容建议标注提示，文明表达是社区长期运营的基础。</div>
+        </details>
+        <details>
+          <summary>如何参与站内的投票和挑战活动？</summary>
+          <div class="drama-faq-body">活动会在首页公告条、专题企划和官方动态三处同步发布，点击进入活动页即可参与投票或报名。部分活动需要登录账号，作品类挑战需按页面说明提交文件与创作说明。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="drama-section" id="drama-contact">
+    <div class="drama-container">
+      <div class="drama-sec-head">
+        <span class="drama-sec-tag">联系与投稿</span>
+        <h2 class="drama-sec-title">把你的作品，放进 <em>这个内容生态</em></h2>
+        <p class="drama-sec-desc">无论是投稿、合作还是反馈，我们都愿意认真听。企业级内容平台的态度，从回复第一封邮件开始。</p>
+      </div>
+      <div class="drama-contact-grid">
+        <div class="drama-contact-box">
+          <h3>官方联系方式</h3>
+          <p>剧作人官方网站由品牌内容中心统一运营，内容合作、版权沟通与媒体联络请通过以下方式与我们取得联系。</p>
+          <div class="drama-contact-list">
+            <div><span>投稿邮箱</span>creator@juzuoren.example</div>
+            <div><span>合作联络</span>partner@juzuoren.example</div>
+            <div><span>媒体咨询</span>press@juzuoren.example</div>
+            <div><span>工作时间</span>周一至周五 10:00 – 19:00</div>
+            <div><span>办公地址</span>创意园区 B 座 5 层 内容中心</div>
+          </div>
+        </div>
+        <div class="drama-contact-box">
+          <h3>在线留言</h3>
+          <p>填写作品简介或问题，提交后会进入编辑工作台，我们会在两个工作日内回复。</p>
+          <form class="drama-form-row" id="dramaContactForm">
+            <input type="text" placeholder="你的称呼" aria-label="你的称呼" required>
+            <input type="email" placeholder="联系邮箱" aria-label="联系邮箱" required>
+            <textarea rows="3" placeholder="想说的话 / 作品简介" aria-label="留言内容" required></textarea>
+            <button type="submit" class="drama-btn drama-btn-primary" style="justify-content:center">提交留言</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="drama-footer">
+  <div class="drama-container">
+    <div class="drama-footer-grid">
+      <div>
+        <div class="drama-logo" style="margin-bottom:12px">
+          <span class="drama-logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M7 4l12 8-12 8z" fill="#fff"/></svg></span>
+          <span><span class="drama-logo-name">剧作<span style="color:var(--drama-accent)">人</span></span><span class="drama-logo-sub">JUZUOREN</span></span>
+        </div>
+        <p>剧作人是深耕剧集垂直领域的追剧网站官方平台，以原创正版与高清内容为核心，为影迷与创作者搭建值得信赖的内容生态。</p>
+      </div>
+      <div>
+        <h4>内容导航</h4>
+        <div class="drama-footer-links">
+          <a href="#drama-feature">焦点剧集</a>
+          <a href="#drama-stream">热门视频</a>
+          <a href="#drama-topics">专题企划</a>
+          <a href="#drama-creators">创作者矩阵</a>
+        </div>
+      </div>
+      <div>
+        <h4>关于平台</h4>
+        <div class="drama-footer-links">
+          <a href="#drama-about">品牌故事</a>
+          <a href="#drama-news">企业动态</a>
+          <a href="#drama-reviews">社区口碑</a>
+          <a href="#drama-faq">帮助中心</a>
+        </div>
+      </div>
+      <div>
+        <h4>参与共建</h4>
+        <div class="drama-footer-links">
+          <a href="#drama-contact">作品投稿</a>
+          <a href="#drama-contact">商务合作</a>
+          <a href="#drama-contact">意见反馈</a>
+          <a href="#drama-topics">活动报名</a>
+        </div>
+      </div>
+    </div>
+    <div class="drama-footer-bottom">
+      <span>© 2026 剧作人 · 追剧网站官方网站 | 版权所有 | 持续运营中</span>
+      <span>原创正版 · 高清品质 · 用户至上</span>
+    </div>
+  </div>
+</footer>
+
+<button class="drama-top-btn" id="dramaTopBtn" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="drama-toast" id="dramaToast"></div>
+
+<div class="drama-modal" id="dramaModal" role="dialog" aria-modal="true" aria-labelledby="dramaModalTitle">
+  <div class="drama-modal-card">
+    <button class="drama-modal-close" id="dramaModalClose" aria-label="关闭弹窗">×</button>
+    <h3 id="dramaModalTitle">分享</h3>
+    <p id="dramaModalBody">把这部剧作人追剧网站分享给朋友，一起聊聊你最近在追的那一集。</p>
+    <div class="drama-share-row">
+      <button class="drama-share-item" data-drama-share="微信">微信</button>
+      <button class="drama-share-item" data-drama-share="微博">微博</button>
+      <button class="drama-share-item" data-drama-share="QQ">QQ</button>
+      <button class="drama-share-item" data-drama-share="复制链接">复制链接</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var toast = document.getElementById('dramaToast');
+  var toastTimer = null;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('is-show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('is-show'); }, 2000);
+  }
+
+  /* 移动端导航 */
+  var burger = document.getElementById('dramaBurger');
+  var nav = document.getElementById('dramaNav');
+  if(burger && nav){
+    burger.addEventListener('click', function(){
+      var open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){
+        nav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  /* 搜索 */
+  var searchInput = document.getElementById('dramaSearchInput');
+  var searchFeedback = document.getElementById('dramaSearchFeedback');
+  var stream = document.getElementById('dramaStream');
+  if(searchInput && searchFeedback){
+    searchInput.addEventListener('input', function(){
+      var kw = searchInput.value.trim();
+      var cards = stream ? stream.querySelectorAll('.drama-card') : [];
+      if(!kw){
+        searchFeedback.classList.remove('is-show');
+        searchFeedback.textContent = '';
+        cards.forEach(function(c){ c.style.display = ''; });
+        return;
+      }
+      var hit = 0;
+      cards.forEach(function(c){
+        var text = c.textContent || '';
+        if(text.indexOf(kw) > -1){ c.style.display = ''; hit++; }
+        else { c.style.display = 'none'; }
+      });
+      searchFeedback.textContent = '“' + kw + '” 相关结果 ' + hit + ' 条' + (hit === 0 ? '，换个词试试，比如剧名或创作者昵称' : '');
+      searchFeedback.classList.add('is-show');
+    });
+  }
+
+  /* 标签筛选 */
+  var filter = document.getElementById('dramaFilter');
+  if(filter && stream){
+    filter.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-drama-filter]');
+      if(!btn) return;
+      filter.querySelectorAll('.drama-chip').forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var cat = btn.getAttribute('data-drama-filter');
+      stream.querySelectorAll('.drama-card').forEach(function(c){
+        c.style.display = (cat === 'all' || c.getAttribute('data-drama-cat') === cat) ? '' : 'none';
+      });
+    });
+  }
+
+  /* 点赞 / 收藏 */
+  document.addEventListener('click', function(e){
+    var likeBtn = e.target.closest('[data-drama-like]');
+    if(likeBtn){
+      var b = likeBtn.querySelector('b');
+      var num = parseInt((b ? b.textContent : '0').replace(/,/g,''),10) || 0;
+      var liked = likeBtn.classList.toggle('is-liked');
+      num = liked ? num + 1 : Math.max(0, num - 1);
+      if(b) b.textContent = num.toLocaleString('en-US');
+      likeBtn.firstChild.textContent = liked ? '♥ ' : '♡ ';
+      showToast(liked ? '已加入喜欢' : '已取消喜欢');
+      return;
+    }
+    var saveBtn = e.target.closest('[data-drama-save]');
+    if(saveBtn){
+      var saved = saveBtn.classList.toggle('is-saved');
+      saveBtn.innerHTML = (saved ? '★ 已收藏' : '☆ 收藏');
+      showToast(saved ? '已收藏到我的剧单' : '已取消收藏');
+      return;
+    }
+    var copyBtn = e.target.closest('[data-drama-copy]');
+    if(copyBtn){
+      copyLink();
+      return;
+    }
+    var commentBtn = e.target.closest('[data-drama-comment]');
+    if(commentBtn){
+      openModal('评论整理中', '该剧集的评论精华正在由编辑团队整理，稍后会以长评形式发布，欢迎先在剧评区参与讨论。');
+      return;
+    }
+  });
+
+  function copyLink(){
+    var url = 'https://juzuoren.example/drama';
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){
+        showToast('链接已复制，可以分享给朋友了');
+      }).catch(function(){ showToast('复制失败，请手动选择地址'); });
+    } else {
+      showToast('已生成分享链接，请手动复制');
+    }
+  }
+
+  /* 创作者弹窗 */
+  document.querySelectorAll('[data-drama-creator]').forEach(function(card){
+    card.addEventListener('click', function(){
+      var raw = card.getAttribute('data-drama-creator') || '';
+      var parts = raw.split('|');
+      var name = parts[0] || '创作者';
+      var bio = parts[1] || '';
+      var num = parts[2] || '0';
+      var fans = parts[3] || '0';
+      openModal(name, bio + ' 已在站内发布 ' + num + ' 部作品，累计 ' + fans + ' 关注。');
+    });
+  });
+
+  /* 分享弹窗 */
+  var heroShare = document.getElementById('dramaShareHero');
+  if(heroShare){
+    heroShare.addEventListener('click', function(){
+      openModal('分享剧作人', '把这部剧作人追剧网站分享给朋友，一起聊聊你最近在追的那一集。');
+    });
+  }
+
+  var modal = document.getElementById('dramaModal');
+  var modalTitle = document.getElementById('dramaModalTitle');
+  var modalBody = document.getElementById('dramaModalBody');
+  var modalClose = document.getElementById('dramaModalClose');
+
+  function openModal(title, body){
+    modalTitle.textContent = title;
+    modalBody.textContent = body;
+    modal.classList.add('is-show');
+  }
+  function closeModal(){
+    modal.classList.remove('is-show');
+  }
+  if(modalClose){ modalClose.addEventListener('click', closeModal); }
+  if(modal){
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+      var share = e.target.closest('[data-drama-share]');
+      if(share){
+        var channel = share.getAttribute('data-drama-share');
+        if(channel === '复制链接'){ copyLink(); }
+        else { showToast('已生成 ' + channel + ' 分享卡片'); }
+        closeModal();
+      }
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+
+  /* 表单 */
+  var form = document.getElementById('dramaContactForm');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      showToast('留言已提交，编辑会在两个工作日内回复');
+      form.reset();
+    });
+  }
+
+  /* 回到顶部 */
+  var topBtn = document.getElementById('dramaTopBtn');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 520){ topBtn.classList.add('is-show'); }
+    else { topBtn.classList.remove('is-show'); }
+  });
+  if(topBtn){
+    topBtn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+</body>
+                </html>
